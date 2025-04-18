@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <title>Emp Data</title>
+  <script>
+    var emp1=
+      {
+      empId:"CEC523",
+      firstName:"Grandhi",
+      lastName:"Alekhya",
+      designation:"developer",
+      age:"21",
+      phNo:"8088038954",
+      email:"ale@gmail.com"
+     }
+     var emp2=
+      {
+      empId:"CEC553",
+      firstName:"Thangudu",
+      lastName:"Hemalatha",
+      designation:"tester",
+      age:"22",
+      phNo:"8651307149",
+      email:"hema@gmail.com"
+     }
+     var emp3=
+      {
+      empId:"CEC526",
+      firstName:"killi",
+      lastName:"Sunitha",
+      designation:"tester",
+      age:"21",
+      phNo:"5643267865",
+      email:"suni@gmail.com"
+     }
+     var emp4=
+      {
+      empId:"CEC528",
+      firstName:"kolli",
+      lastName:"akhila",
+      designation:"android developer",
+      age:"23",
+      phNo:"78954621232",
+      email:"akhi@gmail.com"
+     }
+     var emp5=
+      {
+      empId:"CEC517",
+      firstName:"Dunga",
+      lastName:"Lohith",
+      designation:"Software developer",
+      age:"21",
+      phNo:"995745218963",
+      email:"lohith@gmail.com"
+     }
+     var empList=[emp1,emp2,emp3,emp4,emp5];
+
+
+     console.log(empList);
+  </script>
+
+</head>
+
+<body>
+  <h1>search for an employee</h1>
+  <table>
+    <tr>
+      <td>EmpId:</td><td><input type="text" id="empId"></td>
+      <td>firstName:</td><td><input type="text" id="firstName"></td>
+      <td>lastName:</td><td><input type="text" id="lastName"></td>
+    </tr>
+    <tr>
+      <td>designation:</td><td><input type="text" id="desi"></td>
+      <td>age:</td><td><input type="text" id="age"></td>
+    </tr>
+    <tr>
+      <td>phNo:</td><td><input type="text" id="phNo"></td>
+      <td>Email:</td><td><input type="text" id="email"></td>
+      <td>
+        <button>search</button>
+      </td>
+    </tr>
+    
+  </table>
+  
+  <div id="empListTable">
+
+  </div>
+</body>
+<script>
+  var tableDiv=document.getElementById("empListTable");
+  var table=document.createElement("table");
+  table.setAttribute("border","1");
+  var headerRow=document.createElement("tr");
+  var keys = Object.keys(empList[0]);
+  keys.forEach(function(key){
+    var th = document.createElement("th");
+    th.innerHTML=key;
+    headerRow.appendChild(th);
+  });
+table.appendChild(headerRow);
+
+
+empList.forEach(function(emp) {
+  var row = document.createElement("tr");
+  keys.forEach(function(key) {
+    var td = document.createElement("td");
+    td.innerText = emp[key]; 
+    row.appendChild(td);
+  });
+  table.appendChild(row);
+});
+
+tableDiv.appendChild(table);
+
+</script>
+</html>
