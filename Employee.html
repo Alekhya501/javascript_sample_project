@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <title>Employee Details</title>
+</head>
+<body>
+  
+    <h1>search for an employee</h1>
+    <table>
+      <tr>
+        <td>EmpId:</td><td><input type="text" id="empId"></td>
+        <td>firstName:</td><td><input type="text" id="firstName"></td>
+        <td>lastName:</td><td><input type="text" id="lastName"></td>
+      </tr>
+      <tr>
+        <td>designation:</td><td><input type="text" id="desi"></td>
+        <td>age:</td><td><input type="text" id="age"></td>
+      </tr>
+      <tr>
+        <td>phNo:</td><td><input type="text" id="phNo"></td>
+        <td>Email:</td><td><input type="text" id="email"></td>
+        <td>
+          <button onclick="SearchEmployee()" >search</button>
+        </td>
+      </tr>
+      
+    </table>
+    
+    <div id="empListTable">
+  
+    </div>
+  
+</body>
+<script>
+  var headers = ["EmpID", "First Name", "Last Name", "Designation", "Age", "PhoneNumber", "Email"];
+  var empList = [
+    ["CEC523", "Grandhi", "Alekhya", "Developer", "21", "8088038954", "ale@gmail.com"],
+    ["CEC553", "Thangudu", "Hemalatha", "Tester", "22", "8651307149", "hema@gmail.com"],
+    ["CEC526", "Killi", "Sunitha", "Tester", "21", "5643267865", "suni@gmail.com"],
+    ["CEC528", "Kolli", "Akhila", "Android Developer", "23", "78954621232", "akhi@gmail.com"]
+  ];
+  var table=document.createElement("table");
+  table.setAttribute("id","table");
+  table.setAttribute("border",1); 
+  var headerRow=document.createElement("tr");
+  for(var i=0;i<headers.length;i++){
+    var th=document.createElement("th");
+    th.innerHTML=headers[i];
+    headerRow.appendChild(th);
+  }
+  table.appendChild(headerRow);
+  for(var i=0;i<empList.length;i++){
+    var tr=document.createElement("tr");
+    for(var j=0;j<empList[i].length;j++){
+      var td=document.createElement("td");
+      td.innerHTML=empList[i][j];
+      tr.appendChild(td);
+
+    }
+    table.appendChild(tr);
+    document.getElementById("empListTable").appendChild(table);
+  }
+</script>
+</html>
+<script>
+function SearchEmployee(){
+  console.log("search function called");
+  var empID=document.getElementById("empId").value;
+  console.log(empID);
+}
+</script>
