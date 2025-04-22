@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="demo"></p>
+</body>
+<script>
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var d=new Date();
+  var month=months[d.getMonth()]
+  // var d=new Date(2025,11,18);
+  // document.getElementById("demo").innerHTML=d.toDateString();
+  // document.getElementById("demo").innerHTML=d.getFullYear();
+  // document.getElementById("demo").innerHTML=month;
+  document.getElementById("demo").innerHTML=d.getDay();
+</script>
+</html>

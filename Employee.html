@@ -1,72 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <title>Employee Details</title>
 </head>
 <body>
-  
-    <h1>search for an employee</h1>
-    <table>
-      <tr>
-        <td>EmpId:</td><td><input type="text" id="empId"></td>
-        <td>firstName:</td><td><input type="text" id="firstName"></td>
-        <td>lastName:</td><td><input type="text" id="lastName"></td>
-      </tr>
-      <tr>
-        <td>designation:</td><td><input type="text" id="desi"></td>
-        <td>age:</td><td><input type="text" id="age"></td>
-      </tr>
-      <tr>
-        <td>phNo:</td><td><input type="text" id="phNo"></td>
-        <td>Email:</td><td><input type="text" id="email"></td>
-        <td>
-          <button onclick="SearchEmployee()" >search</button>
-        </td>
-      </tr>
+
+<h1>Search for an Employee</h1>
+<table>
+  <tr>
+    <td><span id="empIdLabel">EmpId:</span></td><td><input type="text" id="empId"></td>
+    <td>First Name:</td><td><input type="text" id="firstName"></td>
+    <td>Last Name:</td><td><input type="text" id="lastName"></td>
+  </tr>
+  <tr>
+    <td>Designation:</td><td><input type="text" id="designation"></
       
-    </table>
-    
-    <div id="empListTable">
-  
-    </div>
-  
-</body>
+      >
+    <td>Age:</td><td><input type="text" id="age"></td>
+  </tr>
+  <tr>
+    <td>Phone No:</td><td><input type="text" id="phNo"></td>
+    <td>Email:</td><td><input type="text" id="email"></td>
+    <td><button onclick="SearchEmployee()">Search</button></td>
+  </tr>
+</table>
+
+<div id="empListTable"></div>
+
 <script>
-  var headers = ["EmpID", "First Name", "Last Name", "Designation", "Age", "PhoneNumber", "Email"];
+  var headers = ["EmpID", "FirstName", "LastName", "Designation", "Age", "PhoneNumber", "Email"];
   var empList = [
     ["CEC523", "Grandhi", "Alekhya", "Developer", "21", "8088038954", "ale@gmail.com"],
     ["CEC553", "Thangudu", "Hemalatha", "Tester", "22", "8651307149", "hema@gmail.com"],
     ["CEC526", "Killi", "Sunitha", "Tester", "21", "5643267865", "suni@gmail.com"],
     ["CEC528", "Kolli", "Akhila", "Android Developer", "23", "78954621232", "akhi@gmail.com"]
   ];
-  var table=document.createElement("table");
-  table.setAttribute("id","table");
-  table.setAttribute("border",1); 
-  var headerRow=document.createElement("tr");
-  for(var i=0;i<headers.length;i++){
-    var th=document.createElement("th");
-    th.innerHTML=headers[i];
-    headerRow.appendChild(th);
-  }
-  table.appendChild(headerRow);
-  for(var i=0;i<empList.length;i++){
-    var tr=document.createElement("tr");
-    for(var j=0;j<empList[i].length;j++){
-      var td=document.createElement("td");
-      td.innerHTML=empList[i][j];
-      tr.appendChild(td);
 
+  function displayEmployeeTable(filteredList) {
+    var table = document.createElement("table");
+    table.setAttribute("id", "table");
+    table.setAttribute("border", 1);
+
+    var headerRow = document.createElement("tr");
+    for (var i = 0; i < headers.length; i++) {
+      var th = document.createElement("th");
+      th.innerHTML = headers[i];
+      headerRow.appendChild(th);
     }
-    table.appendChild(tr);
+    table.appendChild(headerRow);
+
+    if (filteredList.length === 0) {
+      var noDataRow = document.createElement("tr");
+      var td = document.createElement("td");
+      td.setAttribute("colspan", headers.length);
+      td.style.textAlign = "center";
+      td.innerHTML = "No rows found";
+
+      noDataRow.appendChild(td);
+      table.appendChild(noDataRow);
+    } else {
+      for (var i = 0; i < filteredList.length; i++) {
+        var tr = document.createElement("tr");
+        for (var j = 0; j < filteredList[i].length; j++) {
+          var td = document.createElement("td");
+          td.innerHTML = filteredList[i][j];
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }
+    }
+
+    document.getElementById("empListTable").innerHTML = "";
     document.getElementById("empListTable").appendChild(table);
   }
+
+  function SearchEmployee() {
+    var empID = document.getElementById("empId").value.toLowerCase();
+    var firstName = document.getElementById("firstName").value.toLowerCase();
+    var lastName = document.getElementById("lastName").value.toLowerCase();
+    var designation = document.getElementById("designation").value.toLowerCase();
+    var age = document.getElementById("age").value.toLowerCase();
+    var phoneNumber = document.getElementById("phNo").value.toLowerCase();
+    var email = document.getElementById("email").value.toLowerCase();
+
+    var filteredList = [];
+
+    for (var i = 0; i < empList.length; i++) {
+      var emp = empList[i];
+      var match = false;
+
+           
+            if ((empID === '' || emp[0].toLowerCase().includes(empID)) &&
+                (firstName === '' || emp[1].toLowerCase().includes(firstName)) &&
+                (lastName === '' || emp[2].toLowerCase().includes(lastName)) &&
+                (designation === '' || emp[3].toLowerCase().includes(designation)) &&
+                (age === '' || emp[4].toLowerCase().includes(age)) &&
+                (phoneNumber === '' || emp[5].toLowerCase().includes(phoneNumber))&&
+                (email === '' || emp[6].toLowerCase().includes(email))) {
+
+                
+                match = true;
+            }
+      if (match) {
+        filteredList.push(emp);
+      }
+    }
+
+    displayEmployeeTable(filteredList);
+  }
+
+  // Show full table when page loads
+  displayEmployeeTable(empList);
 </script>
-</html>
 <script>
-function SearchEmployee(){
-  console.log("search function called");
-  var empID=document.getElementById("empId").value;
-  console.log(empID);
-}
+  // styling
+  var empID=document.getElementById("empId").style.color="red";
+  var colorEmpId=document.getElementById("empIdLabel").style.color="blue";
 </script>
+
+</body>
+</html>
